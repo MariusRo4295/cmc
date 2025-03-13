@@ -1,368 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robocom</title>
+    <title>Zgardă Electrică</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #000000, #1a1a1a);
-            background-size: 200% 200%;
-            animation: gradientAnimation 15s ease infinite;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        header {
-            background: rgba(31, 31, 31, 0.9);
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            border-bottom: 2px solid #00ff00;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 3em;
-            color: #00ff00;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             font-family: 'Orbitron', sans-serif;
-            animation: glow 1.5s infinite alternate;
-        }
-
-        .menu-btn {
-            cursor: pointer;
-            font-size: 2em;
-            color: #00ff00;
-            background: none;
-            border: none;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
-        }
-
-        .menu {
-            position: absolute;
-            top: 60px;
-            left: 20px;
-            display: none;
-            flex-direction: column;
-            background: rgba(31, 31, 31, 0.9);
-            padding: 10px;
-            border: 2px solid #00ff00;
-            border-radius: 5px;
-            width: 200px;
-            box-shadow: 0 0 20px #00ff00;
-            transition: transform 0.5s ease;
-            transform: translateY(-20px);
-        }
-
-        .menu.show {
-            display: flex;
-            transform: translateY(0);
-        }
-
-        .menu a {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: #ffffff;
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .menu a:hover {
-            background: #00ff00;
-            transform: scale(1.05);
-        }
-
-        .section {
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             text-align: center;
         }
-
-        .section h2 {
-            font-size: 2em;
-            color: #00ff00;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .images {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .images img {
-            width: 200px;
-            height: auto;
-            border: 2px solid #00ff00;
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-top: 20px;
         }
-
-        .images img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px #00ff00;
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
         }
-
-        .description {
-            list-style-type: none;
-            padding: 0;
-            font-size: 1.2em;
-            text-align: left;
-            display: inline-block;
-            animation: slideIn 2s ease-in-out;
-            max-width: 600px;
-            margin: 0 auto;
+        .sub-header, h2 {
+            font-size: 24px;
+            color: #0ff;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
-
-        .description li {
-            margin: 10px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .description li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: #00ff00;
-            animation: blink 1.5s infinite;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .image-placeholder {
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px dashed #00ffff;
+            display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
         }
-
-        .overlay img {
-            max-width: 90%;
-            max-height: 80%;
-            border: 2px solid #00ff00;
+        .circuit-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             border-radius: 10px;
         }
-
-        .overlay .close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2em;
-            color: #00ff00;
-            cursor: pointer;
-            transition: color 0.3s ease;
+        ul {
+            text-align: left;
+            display: inline-block;
+            font-size: 18px;
         }
-
-        .overlay .close:hover {
-            color: #ffffff;
+        .box {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 20px;
         }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
-            }
-            to {
-                text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00;
-            }
+        .footer {
+            margin-top: 20px;
+            font-size: 18px;
         }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 0%;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
     </style>
+</head>
 <body>
-    <header>
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="menu" id="menu">
-            <a href="#home" onclick="navigateTo('home')">Acasă</a>
-            <a href="#projects" onclick="navigateTo('projects')">Proiecte</a>
-            <a href="#about" onclick="navigateTo('about')">Cine Suntem</a>
+    <div class="container">
+        <h2 class="subtitle">Liceul "Vasile Conta",<br> Profesor coordonator: Sauciuc Gheorghe</h2>
+        <h1>ZGARDĂ ELECTRICĂ</h1>
+        <div class="image-placeholder">
+            <img src="https://media.discordapp.net/attachments/1287041751047213108/1349838353276862615/circuit_image.png?ex=67d48e6e&is=67d33cee&hm=d72da0437c4d9c70d3b04a06cb4fc0668cd999b9d2349dd0c9f45d405437455c&=&format=webp&quality=lossless&width=1240&height=889" alt="Zgarda Electrica" class="circuit-image">
         </div>
-        <h1>Robocom</h1>
-    </header>
-
-    <!-- Overlay pentru imaginea mărită -->
-    <div class="overlay" id="overlay">
-        <span class="close" onclick="closeOverlay()">×</span>
-        <img id="overlayImage" src="" alt="Image">
-    </div>
-
-    <section id="home" class="section">
-        <h2>Acasă</h2>
-        <p><strong></strong>
+        <div class="box">
+            <h2>Clasa a XI-a</h2>
+        </div>
+        <div class="box">
+            <h2>Sistem Inteligent de Monitorizare GPS pentru Câini</h2>
+            <p>Proiectul nostru propune un sistem compact și eficient pentru monitorizarea în timp real a câinilor prin GPS. Acesta utilizează module electronice de dimensiuni reduse, fiind confortabil pentru animal și având un impact minim asupra activității sale zilnice.</p>
+            <h3>Caracteristici principale:</h3>
             <ul>
-                <li><strong>🌟 Bine ați venit la proiectul nostru RoboCom! 🤖</li>
-                <li><strong>Suntem doi elevi dedicați acestui proiect:</li>
-                <li><strong>Marius Cuibari – 18 ani, student la Liceul Vasile Conta din Târgu Neamț.</li>
-                <li><strong>Leonte Andreea Valentina – 17 ani, studentă la Liceul Vasile Conta din Târgu Neamț.</li>
-                <li></strong>Suntem aici să creăm idei inovatoare pentru viitor. 🚀</li>
-              </ul> </p>
-    </section>
-
-    <section id="projects" class="section">
-        <h2>Proiecte</h2>
-
-        <!-- Robot ESP 32 CAM -->
-        <div class="project">
-            <h3>Robotul ESP 32 CAM</h3>
-            <div class="images">
-                <img src="images/robot1.jpg" alt="Robot Image 1" onclick="openOverlay(this.src)">
-                <img src="images/robot2.jpg" alt="Robot Image 2" onclick="openOverlay(this.src)">
-                <img src="images/robot3.jpg" alt="Robot Image 3" onclick="openOverlay(this.src)">
-            </div>
-            <p class="description">
-                Robotul ESP 32 CAM este proiectat pentru a spori securitatea și eficiența în hale și spații industriale. Acesta oferă o serie de funcționalități avansate care îl fac ideal pentru monitorizarea și controlul de la distanță.
-
-                <strong>Caracteristici cheie:</strong>
-                <ul>
-                    <li><strong>Supraveghere Inteligentă:</strong> Robotul este echipat cu camere IP care permit monitorizarea în timp real a halei, asigurând o acoperire extinsă și detaliată a spațiului.</li>
-                    <li><strong>Control de la Distanță:</strong> Robotul poate fi controlat de la distanță printr-o aplicație dedicată, permițând utilizatorilor să ajusteze parametrii și să supravegheze activitatea fără a fi prezent fizic.</li>
-                    <li><strong>Monitorizare Ambientală:</strong> Echipat cu senzori pentru umiditate și temperatură, robotul trimite informații esențiale prin SMS și prin aplicația sa, asigurându-se că condițiile ambientale sunt monitorizate constant.</li>
-                    <li><strong>Alertare Imediată:</strong> În caz de anomalii sau condiții neobișnuite, robotul poate trimite alerte instantanee pentru a permite o reacție rapidă și eficientă.</li>
-                    <li><strong>Reîncărcare Automată:</strong> Când bateria se apropie de sfârșit, robotul se întoarce automat la stația de încărcare pentru a se reîncărca complet, asigurându-se că este mereu pregătit pentru următoarea misiune.</li>
-                    <li><strong>Integrare cu Alte Sisteme:</strong> Poate fi integrat cu alte soluții de securitate și automatizare, creând un sistem coerent și eficient de management al halei.</li
-                Robotul ESP 32 CAM reprezintă o soluție completă pentru supravegherea și gestionarea spațiilor industriale, combinând tehnologie de vârf cu funcționalitate extinsă.
-            </p>
+                <li>Localizare GPS în timp real – Prin trimiterea unui cod SMS la numărul asociat modulului, proprietarul poate primi imediat poziția exactă a câinelui.</li>
+                <li>Monitorizare audio – Sistemul include un microfon ce permite ascultarea sunetelor ambientale din jurul câinelui.</li>
+                <li>Autonomie ridicată – Bateria de 4,2V și 1000mAh asigură o funcționare de aproximativ 30 de zile.</li>
+                <li>Funcție de alertare rapidă – Pe zgardă este integrat un buton de urgență.</li>
+                <li>Design minimalist și versatil – Dimensiuni reduse pentru confort maxim.</li>
+            </ul>
+            <h3>Componente utilizate:</h3>
+            <ul>
+                <li>ESP32-C3 – Microcontroler principal.</li>
+                <li>Modul mini A6/GA6 GPRS GSM – Permite trimiterea mesajelor SMS și apelurilor.</li>
+                <li>Modul L76X GPS – Asigură localizarea precisă.</li>
+                <li>Baterie Li-Ion 4,2V / 1000mAh – Oferă o autonomie extinsă.</li>
+            </ul>
         </div>
-
-        <!-- Drona Autonomă -->
-        <div class="project">
-            <h3>Drona Autonomă</h3>
-            <div class="images">
-                <img src="images/drone1.jpg" alt="Drone Image 1" onclick="openOverlay(this.src)">
-                <img src="images/drone2.jpg" alt="Drone Image 2" onclick="openOverlay(this.src)">
-                <img src="images/drone3.jpg" alt="Drone Image 3" onclick="openOverlay(this.src)">
-            </div>
-            <p class="description">
-                Descoperă Drona Autonomă, o soluție avansată de securitate și monitorizare. Acest sistem revoluționar integrează tehnologie de vârf pentru a asigura protecția și supravegherea eficientă a spațiilor tale. 
-
-                <strong>Caracteristici cheie:</strong>
-                <ul>
-                    <li><strong>Detectare Inteligentă:</strong> Drona este echipată cu camere IP avansate care detectează mișcările și activitatea din zona monitorizată. Când sunt detectați intruși, sistemul se activează automat.</li>
-                    <li><strong>Decolare Autonomă:</strong> La detectarea unui intrus, drona decolează imediat fără intervenție umană, asigurând o reacție promptă în fața amenințărilor.</li>
-                    <li><strong>Survolare Precisa:</strong> Drona efectuează zboruri automate de supraveghere în jurul intrusului, capturând imagini și video pentru o analiză ulterioară.</li>
-                    <li><strong>Reîncărcare Automată:</strong> Drona se întoarce automat la stația de încărcare când bateria se apropie de sfârșit, asigurându-se că este gata pentru următoarea misiune fără a necesita intervenție umană.</li>
-                    <li><strong>Integrare cu Sistemul de Securitate:</strong> Se poate integra cu alte sisteme de securitate, având capacitatea de a trimite alerte și actualizări în timp real către centrele de comandă.</li>
-                    <li><strong>Operare Ușoară:</strong> Sistemul este ușor de configurat și operat, cu opțiuni de control de la distanță și programare a misiunilor.</li>
-                </ul>
-                Această dronă autonomă nu doar că sporește securitatea, dar adaugă și un nivel suplimentar de inteligență și răspuns rapid pentru a preveni și a răspunde eficient la posibilele incidente de securitate.
-            </p>
+        <div class="box">
+            <h2>Proiect realizat de:</h2>
+            <p>Leonte Andreea-Valentina</p>
+            <p>Cuibari Marius-Constantin</p>
         </div>
-
-        <!-- AeroTracer X1 -->
-        <div class="project">
-            <h3>AeroTracer X1</h3>
-            <div class="images">
-                <img src="images/car1.jpg" alt="Car Image 1" onclick="openOverlay(this.src)">
-                <img src="images/car2.jpg" alt="Car Image 2" onclick="openOverlay(this.src)">
-                <img src="images/car3.jpg" alt="Car Image 3" onclick="openOverlay(this.src)">
-            </div>
-            <p class="description">
-                AeroTracer X1 reprezintă ultima inovație în tehnologia vehiculelor autonome. Acest vehicul sofisticat este proiectat pentru a urma trasee prestabilite și oferă opțiuni de control versatile, atât manuale cât și automate.
-
-                <strong>Caracteristici cheie:</strong>
-                <ul>
-                    <li><strong>Urmărire Autonomă a Liniilor:</strong> AeroTracer X1 este echipat cu senzori avansați care îi permit să urmeze linii pe terenuri variate, asigurând o navigare precisă și stabilă.</li>
-                    <li><strong>Control prin Bluetooth:</strong> Utilizatorii pot prelua controlul vehiculului prin Bluetooth, permițând ajustări și manevre fine de la distanță, folosind un smartphone sau o tabletă.</li>
-                    <li><strong>Control prin Telecomandă IR:</strong> AeroTracer X1 include opțiunea de a fi controlat manual prin telecomandă IR, oferind o alternativă simplă și intuitivă pentru manevrarea vehiculului.</li>
-                    <li><strong>Versatilitate și Adaptabilitate:</strong> AeroTracer X1 poate fi utilizat în diverse scenarii, inclusiv în cercetare, educație și aplicații industriale, datorită adaptabilității sale la diferite medii și condiții.</li>
-                    <li><strong>Design Futuristic:</strong> Cu un aspect modern și tehnologie avansată, AeroTracer X1 nu doar că performează excelent, dar și arată impresionant, făcându-l un vehicul de top în gama sa.</li>
-                    <li><strong>Reîncărcare Automată:</strong> Când bateria se apropie de sfârșit, vehiculul se întoarce automat la stația de încărcare pentru a se reîncărca complet, asigurându-se că este mereu gata pentru următoarea utilizare.</li>
-                </ul>
-                AeroTracer X1 combină tehnologia de vârf cu funcționalitatea ușor de utilizat, oferind o soluție ideală pentru diverse nevoi de mobilitate autonomă și controlabilă.
-            </p>
+        <div class="image-placeholder">
+            <img src="https://media.discordapp.net/attachments/1287041751047213108/1349838353276862615/circuit_image.png?ex=67d48e6e&is=67d33cee&hm=d72da0437c4d9c70d3b04a06cb4fc0668cd999b9d2349dd0c9f45d405437455c&=&format=webp&quality=lossless&width=1240&height=889" alt="Circuit Schema" class="circuit-image">
         </div>
-    </section>
-
-    <section id="about" class="section">
-        <h2>Cine Suntem</h2>
-        <p>La Robocom, suntem pasionați de tehnologie și inovație. Echipa noastră se dedică dezvoltării soluțiilor avansate în robotică și automatizare, cu scopul de a revoluționa modul în care interacționăm cu tehnologia. De la roboți de supraveghere la drone inteligente și vehicule autonome, fiecare proiect este realizat cu cea mai mare atenție la detalii și calitate.</p>
-    </section>
-
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById('menu');
-            menu.classList.toggle('show');
-        }
-
-        function navigateTo(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-            });
-
-            // Show the selected section
-            document.getElementById(sectionId).style.display = 'block';
-
-            // Close the menu after selection
-            document.getElementById('menu').classList.remove('show');
-        }
-
-        document.querySelector('.menu').addEventListener('mouseleave', function() {
-            this.classList.remove('show');
-        });
-
-        function openOverlay(src) {
-            var overlay = document.getElementById('overlay');
-            var overlayImage = document.getElementById('overlayImage');
-            overlay.style.display = 'flex';
-            overlayImage.src = src;
-        }
-
-        function closeOverlay() {
-            var overlay = document.getElementById('overlay');
-            overlay.style.display = 'none';
-        }
-
-        // Initial display setup
-        navigateTo('home');
-    </script>
+        <div class="footer">
+            <p>Clasa a XI-a</p>
+        </div>
+    </div>
 </body>
 </html>
